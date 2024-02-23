@@ -1,4 +1,4 @@
-export type SearchBy = 'name' | 'currency' | 'language' | 'capital';
+export type Category = 'name' | 'currency' | 'language' | 'capital';
 export type SortBy = 'name:asc' | 'name:desc' | 'population:asc' | 'population:desc';
 
 export interface Country {

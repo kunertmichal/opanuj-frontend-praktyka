@@ -6,9 +6,9 @@ import { inject } from 'vue';
 import { searchFormKey, SearchFormKeyValues } from '../keys.ts';
 
 const {
-  searchBy,
+  category,
   searchTerm,
-  searchByOptions,
+  categories,
   sortByOptions,
   sortBy,
   onSubmit,
@@ -18,7 +18,7 @@ const {
 
 <template>
   <form @submit.prevent="onSubmit" class="flex gap-2">
-    <Select v-model="searchBy" :options="searchByOptions" />
+    <Select v-model="category" :options="categories" />
     <Input v-model="searchTerm" type="text" placeholder="Search..." />
     <Select v-model="sortBy" :options="sortByOptions" />
     <Button type="submit">
