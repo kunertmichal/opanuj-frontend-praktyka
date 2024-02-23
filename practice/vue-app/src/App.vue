@@ -52,6 +52,10 @@ provide(searchResultKey, foundCountries);
   <div class="max-w-3xl mx-auto p-8 bg-white">
     <h1 class="text-2xl text-center font-bold mb-8">REST Countries</h1>
     <SearchForm />
-    <SearchResult class="mt-8" />
+    <div v-if="foundCountries.length === 0" class="text-center mt-8">
+      <h2 class="font-bold">No results</h2>
+      <p>Provide a valid search</p>
+    </div>
+    <SearchResult v-else class="mt-8" />
   </div>
 </template>
