@@ -21,7 +21,7 @@ export type GameBodyKeyValues = {
   countryToGuess: Ref<Country | null>,
   userInput: Ref<string>,
   check: () => void,
-  drawAgain: () => void
+  drawAgain: () => Promise<void>
 }
 
 export const searchFormKey = Symbol() as InjectionKey<SearchFormKeyValues>
