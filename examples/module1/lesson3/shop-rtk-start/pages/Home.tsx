@@ -2,7 +2,7 @@ import Product from '../components/Product';
 import { useGetAllProductsQuery } from '../services/products';
 
 const Home = () => {
-  const { data = [], isLoading } = useGetAllProductsQuery(undefined)
+  const { data = [], isLoading } = useGetAllProductsQuery()
 
   return (
     <div>
