@@ -5,24 +5,15 @@ function validator() {
   const result = document.getElementById('result');
 
   button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+    const inputAsNumber = Number(input.value)
+    const validationResult = new Validator(inputAsNumber)
+      .isNumber()
+      .isEven()
+      .isGreaterThan(0)
+      .isLowerThan(100)
+      .isRequired()
+
+    result.innerHTML = validationResult.isValidationSuccessful() ? "Valid" : validationResult.errors.join(' ')
   });
 
   button2.addEventListener('click', () => {
@@ -32,3 +23,49 @@ function validator() {
 }
 
 validator();
+
+class Validator {
+  constructor(input) {
+    this.input = input;
+    this.errors = []
+  }
+
+  isNumber() {
+    if (typeof this.input !== 'number') {
+      this.errors.push('Input must be a number.');
+    }
+    return this;
+  }
+
+  isEven() {
+    if (this.input % 2 !== 0) {
+      this.errors.push('Input must be even.');
+    }
+    return this;
+  }
+
+  isGreaterThan(value) {
+    if (this.input <= value) {
+      this.errors.push(`Input must be greater than ${value}.`);
+    }
+    return this;
+  }
+
+  isLowerThan(value) {
+    if (this.input >= value) {
+      this.errors.push(`Input must be lower than ${value}.`);
+    }
+    return this;
+  }
+
+  isRequired() {
+    if (this.input === null || this.input === undefined || this.input === '') {
+      this.errors.push('Input is required.');
+    }
+    return this;
+  }
+
+  isValidationSuccessful() {
+    return this.errors.length === 0
+  }
+}
